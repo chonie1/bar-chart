@@ -1,3 +1,8 @@
-.bar {
+.chart {
 
 }
+
+.bar {
+  display: inline-block;
+}
+
