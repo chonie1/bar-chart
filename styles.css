@@ -23,15 +23,15 @@
   margin-top: auto;
   border-width: 0px 4px 4px 0px;
   border: 4px solid white;
+  position: relative;
 }
 
-.xLabel {
+.xLabel{
+  height: relative;
+  width: 100%;
   position: absolute;
-  bottom: 15%;
-  overflow: hidden;
-  max-width: inherit;
-  display:block;
-  justify-content: center;
+  bottom: 0%;
+  transform: translate(0px, 30px);
 }
 
 .yAxis {
@@ -39,6 +39,9 @@
 }
 
 .label {
+  position:absolute;
+  width: 100%;
+  transform: translate(0px, 10px);
 
 }
 

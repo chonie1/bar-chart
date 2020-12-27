@@ -31,7 +31,7 @@ $(document).ready(function(){
       barObj.height = Math.floor(data[i] / chartYMax * 100) + "%";
       barObj.bar = $(`<div class=bar id=bar${i}>
       <div id="label"${data[i]} class="label">${barObj.label}</div>
-      <div id="xLabel"${i} class="xLabel">Hello</>
+      <div id="xLabel"${i} class="xLabel">Hello</div>
       </div>`)
         .appendTo("#chart")
         .height(barObj.height)
