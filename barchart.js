@@ -1,9 +1,13 @@
 $(document).ready(function(){
 
+  function drawXLabels(arr){
+    //accepts array of labels
+  }
+
   function drawYAxis(min,max,increment){
     //Draws Y Axis like an ordered list
     for(let i = max; i >= min; i -= increment){
-
+      i = Math.round(i)
       $(`<td class="yBar">${i}</td>)`)
         .appendTo("#yAxis")
         .height(increment / (max - min) * 100 + "%");
@@ -25,7 +29,10 @@ $(document).ready(function(){
       let barObj = {}
       barObj.label = data[i];
       barObj.height = Math.floor(data[i] / chartYMax * 100) + "%";
-      barObj.bar = $(`<div class=bar id=bar${i}><div id="label"${data[i]} class="label">${barObj.label}</div></div>`)
+      barObj.bar = $(`<div class=bar id=bar${i}>
+      <div id="label"${data[i]} class="label">${barObj.label}</div>
+      <div id="xLabel"${i} class="xLabel">Hello</>
+      </div>`)
         .appendTo("#chart")
         .height(barObj.height)
         .width(1 / data.length * 100 + "%")
