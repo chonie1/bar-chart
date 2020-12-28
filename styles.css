@@ -21,14 +21,15 @@ body {
 
 }
 
-.bar {
-  display:inline-table;
-  text-align: center;
-  margin-top: auto;
-  border-right: 20px solid white;
-  border-left: 20px solid white;
+.barContainer{
   position: relative;
+  margin-top:auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
 
+.bar {
+  text-align: center;
 }
 
 .xLabel{

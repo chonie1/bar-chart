@@ -4,10 +4,25 @@ $(document).ready(function(){
   $("#titleForm").hide();
 
   const data = [1,2,3,4,5];
-  const labelArr = ["label1","label2","label3","label4","label5"];
+  const data2 = [1,2,3,4,5];
+
   const options = {
     barColor: "#ffb6c1",
-    labelColor: "white",
+    valColor: "white",
+    barSpacing: "10px solid white",
+    yScale: [1,10,2],
+    yLabelColor: "black",
+    yAxisColor: "black",
+    xLabelColor: "black",
+    titleSize: "30px",
+    titleColor: "#e75480",
+    valPos: "top",
+    xLabels: ["label1","label2","label3","label4","label5"]
+  };
+
+  const options2 = {
+    barColor: "#ADD8E6",
+    valColor: "white",
     barSpacing: "10px solid white",
     yScale: [1,5,2],
     yLabelColor: "black",
@@ -15,7 +30,8 @@ $(document).ready(function(){
     xLabelColor: "black",
     titleSize: "30px",
     titleColor: "#e75480",
-    valPos: "top"
+    valPos: "top",
+    xLabels: ["label1","label2","label3","label4","label5"]
   };
 
   function nameXLabels(arr){
@@ -37,38 +53,39 @@ $(document).ready(function(){
 
   function drawBarChart(data, options, element){
 
-    let figureContainer = $("#figure");
-    let chartContainer = $("#chart");
-    let bars = []; //array for each bar
     const chartYMax = options["yScale"][1];
     const chartYMin = options["yScale"][0];
 
-    //Draws Y-axis with default min 0 and chartYMax incrementing by 1
-    drawYAxis(options["yScale"][0],options["yScale"][1],options["yScale"][2]);
-
-    //Create a container for each bar
-    for(let i = 0; i < data.length; i ++){
-      let barObj = {}
-      barObj.label = data[i];
-      barObj.height = Math.floor(data[i] / chartYMax * 100) + "%";
-      barObj.bar = $(`<div class=bar id=bar${i}>
-      <div id="label"${data[i]} class="label">${barObj.label}</div>
-      <div id="xLabel${i}" class="xLabel">/div>
-      </div>`)
-        .appendTo("#chart")
-        .height(barObj.height)
+    //Create a container for each bar series if there isn't already
+    if($(".barContainer").length === 0){
+      for(let i = 0; i < data.length; i ++){
+        $(`<div class="barContainer" id="barContainer${i}">
+        <div id="xLabel${i}" class="xLabel"></div>
+        </div>`)
+        .appendTo(element)
+        .height("100%")
         .width(1 / data.length * 100 + "%")
-      bars.push(barObj);
+      }
     }
 
-    //Name x-axis
-    nameXLabels(labelArr);
+    //Add bars to the container
+    for(let i = 0; i < data.length; i ++){
+      let barObj = {}
+      let label = data[i];
+      let height = Math.floor(data[i] / chartYMax * 100) + "%";
+      $(`<div class=bar id=bar${i}>
+      <div id="label"${data[i]} class="label">${label}</div>
+      </div>`)
+      .appendTo($(`#barContainer${i}`))
+      .height(height)
+      .width("100%")
+    }
 
     //Customize CSS based on options
     for(let option in options){
       if(option === "barColor"){
         $(".bar").css("background-color",options[option]);
-      } else if(option === "labelColor"){
+      } else if(option === "valColor"){
         $(".label").css("color",options[option]);
       } else if(option === "barSpacing"){
         $(".bar").css("border-right",options[option]);
@@ -84,23 +101,29 @@ $(document).ready(function(){
       } else if(option === "xLabelColor"){
         $(".xLabel").css("color",options[option]);
       } else if(option === "valPos"){
-          if(options[option] === "top"){
-          } else if(options[option] === "middle"){
-            $(".label").css("bottom","50%");
-          } else if(options[option] === "bottom"){
-            $(".label").css("bottom","0%");
-          }
-
+        if(options[option] === "top"){
+        } else if(options[option] === "centre"){
+          $(".label").css("bottom","50%");
+        } else if(options[option] === "bottom"){
+          $(".label").css("bottom","0%");
+        }
       }
     }
 
   }
 
 
-  drawBarChart(data,options,"#figure");
+  //draws chart with bar containers
+  drawBarChart(data,options,"#chart");
+  drawBarChart(data2, options, "#chart");
 
+  //adds the second series if there is one
 
+  //Name x-axis
+  nameXLabels(options["xLabels"]);
 
+  //Draws Y-axis with default min 0 and chartYMax incrementing by 1
+  drawYAxis(options["yScale"][0],options["yScale"][1],options["yScale"][2]);
 
   //Change titles
   $("#title").on("click", function() {
