@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+  //Hide all inputs first
+  $("#titleForm").hide();
+
   function nameXLabels(arr){
     for (let i = 0; i < arr.length; i ++) {
       $("#xLabel"+i).html(arr[i]);
@@ -49,6 +52,25 @@ $(document).ready(function(){
   drawBarChart(data,null,"#chart");
   nameXLabels(labelArr);
 
+
+
+  //Change titles
+  $("#title").on("click", function() {
+    $("#titleForm").show();
+    $("#title").hide();
+  })
+
+  //Ensure title can be submitted on enter
+  $("#titleInput").keydown(function(e) {
+    if (e.which == 13) {
+        $("#titleForm").submit(function(event){
+            event.preventDefault();
+            $("#title").html($("#titleInput").val());
+          })
+        $("#titleForm").hide();
+        $("#title").show();
+      }
+    });
 });
 
 
