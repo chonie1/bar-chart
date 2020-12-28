@@ -1,7 +1,9 @@
 $(document).ready(function(){
 
-  function drawXLabels(arr){
-    //accepts array of labels
+  function nameXLabels(arr){
+    for (let i = 0; i < arr.length; i ++) {
+      $("#xLabel"+i).html(arr[i]);
+    }
   }
 
   function drawYAxis(min,max,increment){
@@ -32,7 +34,7 @@ $(document).ready(function(){
       barObj.height = Math.floor(data[i] / chartYMax * 100) + "%";
       barObj.bar = $(`<div class=bar id=bar${i}>
       <div id="label"${data[i]} class="label">${barObj.label}</div>
-      <div id="xLabel"${i} class="xLabel">Hello</div>
+      <div id="xLabel${i}" class="xLabel">Hello</div>
       </div>`)
         .appendTo("#chart")
         .height(barObj.height)
@@ -41,10 +43,11 @@ $(document).ready(function(){
     }
   }
 
+  const data = [1,2,3,4,5];
+  const labelArr = ["label1","label2","label3","label4","label5"];
 
-
-  data = [1,2,3,4,5];
   drawBarChart(data,null,"#chart");
+  nameXLabels(labelArr);
 
 });
 
