@@ -7,10 +7,11 @@ $(document).ready(function(){
   function drawYAxis(min,max,increment){
     //Draws Y Axis like an ordered list
     for(let i = max; i >= min; i -= increment){
-      i = Math.round(i)
-      $(`<td class="yBar">${i}</td>)`)
+      i = Math.floor(i)
+      $(`<td class="yBar">${i}
+      <div class="tick">-</div></td>)`)
         .appendTo("#yAxis")
-        .height(increment / (max - min) * 100 + "%");
+        .height(increment / (max - min + 1) * 100 + "%");
     }
   }
   function drawBarChart(data, options, element){
@@ -18,11 +19,11 @@ $(document).ready(function(){
     let figureContainer = $("#figure");
     let chartContainer = $("#chart");
     let bars = []; //array for each bar
-    const chartYMax = Math.max(...data)*1.05; //Gives 5% margin from top
+    const chartYMax = Math.max(...data); //Gives 5% margin from top
     const chartYMin = Math.min(...data);
 
     //Draws Y-axis with default min 0 and chartYMax incrementing by 1
-    drawYAxis(0,chartYMax/ 1.05,1);
+    drawYAxis(chartYMin,chartYMax,1);
 
     //Create a container for each bar
     for(let i = 0; i < data.length; i ++){
