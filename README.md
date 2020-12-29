@@ -6,14 +6,14 @@ Allows a user to generate a bar chart on a webpage using only JS/JQuery, HTML & 
 Click the following link to view an example barchart: 
 **https://chonie1.github.io/bar-chart/**
 
-##Setup
+## Setup
 Save barchart.js and styles.css into your projects folder and ensure they are linked appropriately to your html page 
 
-##Function
+## Function
 In the .js file, the function used is: drawBarChart(data, options, element);
-Data: An array of data. drawBarChart can be called again for as many series required
-Options: An object with the following properties to customize the bar chart: 
-const options = {
+* Data: An array of data. drawBarChart can be called again for as many series required
+* Options: An object with the following properties to customize the bar chart: 
+* const options = {
     barColor: "#ffb6c1",
     valColor: "white",
     barSpacing: "10px",
@@ -26,12 +26,12 @@ const options = {
     valPos: "bottom",
     xLabels: ["label1", "label2", "label3", "label4", "label5"],
   };
-Element: DOM element or jQuery element that the chart will get rendered into.
+* Element: DOM element or jQuery element that the chart will get rendered into.
 
 ##Known issues/bugs
 1. Tick marks are slightly off centered
 
-##Features to be implemented 
+## Features to be implemented 
 
-##Resources
+## Resources
 
