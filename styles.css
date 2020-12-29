@@ -74,9 +74,13 @@ body {
 }
 
 .tick {
-  position: absolute;
-  display:inline-block;
-  transform: translate(8px,0);
+  height: inherit;
+  width: 100%;
+  position: relative;
+  display: inline-table;
+  justify-content: center;
+  vertical-align: top;
+  transform: translate(23px,-27px);
 }
 
 
