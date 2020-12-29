@@ -31,11 +31,12 @@ In the .js file, the function used is: drawBarChart(data, options, element);
 * Element: DOM element or jQuery element that the chart will get rendered into.
 
 ### Known issues/bugs
-1. Tick marks are slightly off centered
+1. NA
 
 ### Features to be implemented 
 1. Legend for each series
 2. Webpage customizable features
+3. Other customizable features
 
 ### Resources
 * https://api.jquery.com/
