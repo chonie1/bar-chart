@@ -23,13 +23,12 @@ body {
 
 .barContainer{
   position: relative;
-  margin-top:auto;
   display: flex;
   flex-direction: column-reverse;
 }
 
-.bar {
-  text-align: center;
+.bar{
+
 }
 
 .xLabel{
@@ -45,9 +44,10 @@ body {
 }
 
 .label {
-  position:absolute;
+  display: flex;
+  justify-content: center;
   width: 100%;
-  height: relative;
+  height: 100%;
 }
 
 .yAxis-label {
@@ -57,7 +57,7 @@ body {
 }
 
 .yAxis-form {
-  transform: rotate(-90deg);
+  display:flex;
 }
 
 

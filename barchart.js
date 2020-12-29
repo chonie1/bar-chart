@@ -2,36 +2,38 @@ $(document).ready(function(){
 
   //Hide all inputs first
   $("#titleForm").hide();
+  $("#yAxisForm").hide();
 
-  const data = [1,2,3,4,5];
-  const data2 = [1,2,3,4,5];
+  const data = [1,2,3,8,5];
+  const data2 = [1,2,3,4,10];
 
   const options = {
     barColor: "#ffb6c1",
     valColor: "white",
-    barSpacing: "10px solid white",
-    yScale: [1,10,2],
+    barSpacing: "10px",
+    yScale: [1,20,2],
     yLabelColor: "black",
     yAxisColor: "black",
     xLabelColor: "black",
     titleSize: "30px",
     titleColor: "#e75480",
-    valPos: "top",
+    valPos: "bottom",
     xLabels: ["label1","label2","label3","label4","label5"]
   };
 
   const options2 = {
     barColor: "#ADD8E6",
-    valColor: "white",
-    barSpacing: "10px solid white",
-    yScale: [1,5,2],
-    yLabelColor: "black",
-    yAxisColor: "black",
-    xLabelColor: "black",
+    valColor: "#808080",
+    barSpacing: "10px",
+    yScale: [1,20,2],
+    yLabelColor: "#808080",
+    yAxisColor: "#808080",
+    xLabelColor: "#808080",
     titleSize: "30px",
     titleColor: "#e75480",
-    valPos: "top",
-    xLabels: ["label1","label2","label3","label4","label5"]
+    valPos: "bottom",
+    xLabels: ["label1","label2","label3","label4","label5"],
+    chartColor: "#808080"
   };
 
   function nameXLabels(arr){
@@ -51,10 +53,14 @@ $(document).ready(function(){
     }
   }
 
-  function drawBarChart(data, options, element){
+  let uniqId = (function(){
+    var i=0;
+    return function() {
+        return i++;
+    }
+    })();
 
-    const chartYMax = options["yScale"][1];
-    const chartYMin = options["yScale"][0];
+  function drawBarChart(data, options, element){
 
     //Create a container for each bar series if there isn't already
     if($(".barContainer").length === 0){
@@ -68,28 +74,38 @@ $(document).ready(function(){
       }
     }
 
+    //Adds xAxis labels
+    nameXLabels(options["xLabels"]);
+
+    //Adds yAxis based on the latest scale option
+    if($(".yBar").length === 0){
+      drawYAxis(options["yScale"][0],options["yScale"][1],options["yScale"][2]);
+    }
+
+    let labelIds = [];
     //Add bars to the container
     for(let i = 0; i < data.length; i ++){
-      let barObj = {}
       let label = data[i];
-      let height = Math.floor(data[i] / chartYMax * 100) + "%";
+      let height = Math.floor(data[i] / options["yScale"][1] * 100) + "%";
+      let id = uniqId();
+
       $(`<div class=bar id=bar${i}>
-      <div id="label"${data[i]} class="label">${label}</div>
+      <div id="label${id}" class="label">${label}</div>
       </div>`)
       .appendTo($(`#barContainer${i}`))
       .height(height)
       .width("100%")
+      .css("background-color",options["barColor"])
+
+      //Customize label color
+      $(`#label${id}`).css("color",options["valColor"])
     }
 
     //Customize CSS based on options
     for(let option in options){
-      if(option === "barColor"){
-        $(".bar").css("background-color",options[option]);
-      } else if(option === "valColor"){
-        $(".label").css("color",options[option]);
-      } else if(option === "barSpacing"){
-        $(".bar").css("border-right",options[option]);
-        $(".bar").css("border-left",options[option]);
+      if(option === "barSpacing"){
+        $(".bar").css("border-left", `${options[option]} solid white`);
+        $(".chart").css("padding-right", options[option]);
       } else if(option ==="titleSize"){
         $("#title").css("font-size",options[option]);
       } else if(option ==="titleColor"){
@@ -103,27 +119,19 @@ $(document).ready(function(){
       } else if(option === "valPos"){
         if(options[option] === "top"){
         } else if(options[option] === "centre"){
-          $(".label").css("bottom","50%");
+          $(".label").css("align-items","center");
         } else if(options[option] === "bottom"){
-          $(".label").css("bottom","0%");
+          $(".label").css("align-items","flex-end");
         }
+      } else if(option === "chartColor"){
+        $(".chart").css("border-color",options[option])
       }
     }
-
   }
-
 
   //draws chart with bar containers
   drawBarChart(data,options,"#chart");
-  drawBarChart(data2, options, "#chart");
-
-  //adds the second series if there is one
-
-  //Name x-axis
-  nameXLabels(options["xLabels"]);
-
-  //Draws Y-axis with default min 0 and chartYMax incrementing by 1
-  drawYAxis(options["yScale"][0],options["yScale"][1],options["yScale"][2]);
+  drawBarChart(data2, options2, "#chart");
 
   //Change titles
   $("#title").on("click", function() {
@@ -142,6 +150,25 @@ $(document).ready(function(){
         $("#title").show();
       }
     });
+
+    //Change yAxisLabel
+    $("#yAxisLabel").on("click", function() {
+      $("#yAxisForm").show();
+      $("#yAxisLabel").hide();
+    })
+
+    //Ensure title can be submitted on enter
+    $("#yAxisInput").keydown(function(e) {
+      if (e.which == 13) {
+          $("#yAxisForm").submit(function(event){
+              event.preventDefault();
+              $("#yAxisLabel").html($("#yAxisInput").val());
+            })
+          $("#yAxisForm").hide();
+          $("#yAxisLabel").show();
+        }
+    });
+
 
 });
 
