@@ -13,7 +13,8 @@ Save barchart.js and styles.css into your projects folder and ensure they are li
 In the .js file, the function used is: drawBarChart(data, options, element);
 * Data: An array of data. drawBarChart can be called again for as many series required
 * Options: An object with the following properties to customize the bar chart: 
-* const options = {
+* ```javascript
+    const options = {
     barColor: "#ffb6c1",
     valColor: "white",
     barSpacing: "10px",
@@ -26,12 +27,15 @@ In the .js file, the function used is: drawBarChart(data, options, element);
     valPos: "bottom",
     xLabels: ["label1", "label2", "label3", "label4", "label5"],
   };
+  ```
 * Element: DOM element or jQuery element that the chart will get rendered into.
 
-##Known issues/bugs
+## Known issues/bugs
 1. Tick marks are slightly off centered
 
 ## Features to be implemented 
+1. Legend for each series
+2. Webpage customizable features
 
 ## Resources
 
