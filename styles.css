@@ -78,8 +78,6 @@ body {
   width: 100%;
   position: relative;
   display: inline-table;
-  justify-content: center;
-  vertical-align: top;
   transform: translate(23px,-27px);
 }
 
