@@ -4,7 +4,7 @@
 Allows a user to generate a bar chart on a webpage using only JS/JQuery, HTML & CSS. This is a Lighthouse Labs stretch project. 
 
 Click the following link to view an example barchart: 
-**https://chonie1.github.io/bar-chart/**
+**https://connie-ho.github.io/bar-chart/**
 
 ### Setup
 Save barchart.js and styles.css into your projects folder and ensure they are linked appropriately to your html page 
